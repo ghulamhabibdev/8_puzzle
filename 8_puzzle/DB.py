@@ -1,3 +1,4 @@
+from query import Query
 class DB:
     __instance = None
     def __init__(self):

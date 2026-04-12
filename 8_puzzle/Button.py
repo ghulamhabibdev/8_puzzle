@@ -1,6 +1,4 @@
 from tkinter import Button
-
-
 class Btn:
     def __init__(self,):
         self.button = Button()
