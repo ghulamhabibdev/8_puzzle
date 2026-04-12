@@ -1,5 +1,7 @@
+from text import Label
 from Button import Btn
 from Windom import WindowForm
+from Frame import Frame
 class Factory:
     __instance = None 
     def __init__(self):
@@ -12,7 +14,11 @@ class Factory:
         if Factory.__instance is None:
             Factory()
         return Factory.__instance
-    def create_button(self, parent, text, command):
+    def create_button(self):
         return Btn()
     def create_window_form(self):
         return WindowForm()
+    def createLabel(self, parent, text):
+        return Label()
+    def CreateFrame(self):
+        return Frame()
