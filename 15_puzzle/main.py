@@ -4,8 +4,6 @@ from Windom import WindowForm
 from query import Query
 from DB import DB
 from CompontFactory import Factory
-
-
 class FifteenPuzzle:
     WindowFormList = []
     WindowFormList
