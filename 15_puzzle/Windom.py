@@ -1,118 +1,105 @@
 import tkinter as tk
 
+import Button
+
 
 class WindowForm:
     def __init__(self):
         self._window = tk.Tk()
+        self._window.overrideredirect(True) 
         self._width = 400
         self._height = 400
-
-        self._header = None  # ✅ store header reference
-        self._body = None  # ✅ main content area
-
+        self._header = None
+        self._body = None
+        self._x = 0
+        self._y = 0
         self._window.title("15 Puzzle")
         self.update_size()
-
-        self._init_layout()  # ✅ initialize layout
-
-    # ---------------- Layout Setup ----------------
+        self._init_layout()
+        self._build_header()  
     def _init_layout(self):
-        # Header Frame (top)
-        self._header = tk.Frame(self._window, bg="#2c3e50", height=60)
+        self._container = tk.Frame(self._window, bd=1, relief="solid")
+        self._container.pack(fill="both", expand=True)
+
+        self._header = tk.Frame(self._container, bg="#1e272e", height=40)
         self._header.pack(fill="x")
 
-        # Body Frame (rest of UI)
-        self._body = tk.Frame(self._window, bg="#ecf0f1")
+        self._body = tk.Frame(self._container, bg="#ecf0f1")
         self._body.pack(fill="both", expand=True)
 
-    # ---------------- Header ----------------
-    def createHeader(self, title="15 Puzzle Game", subtitle=None):
-        # Clear previous header content
-        for widget in self._header.winfo_children():
-            widget.destroy()
+        self._header.bind("<Button-1>", self._start_move)
+        self._header.bind("<B1-Motion>", self._do_move)
 
-        # Title
-        title_label = tk.Label(
+    def _build_header(self, title="15 Puzzle Game"):
+        self.clear_header()
+        tk.Label(
             self._header,
             text=title,
-            bg="#2c3e50",
+            bg="#1e272e",
             fg="white",
-            font=("Arial", 18, "bold"),
-        )
-        title_label.pack(side="left", padx=15)
+            font=("Arial", 12, "bold"),
+        ).pack(side="left", padx=10)
+        control = tk.Frame(self._header, bg="#1e272e")
+        control.pack(side="right")
 
-        # Optional subtitle
-        if subtitle:
-            sub_label = tk.Label(
-                self._header,
-                text=subtitle,
-                bg="#2c3e50",
-                fg="#bdc3c7",
-                font=("Arial", 10),
-            )
-            sub_label.pack(side="left", padx=10)
+        tk.Button(
+            control, text="—", bg="#1e272e", fg="white", bd=0, command=self._minimize
+        ).pack(side="left", padx=5)
 
+        tk.Button(
+            control, text="□", bg="#1e272e", fg="white", bd=0, command=self._maximize
+        ).pack(side="left", padx=5)
+
+        tk.Button(
+            control,
+            text="✕",
+            bg="#e74c3c",
+            fg="white",
+            bd=0,
+            command=self._window.destroy,
+        ).pack(side="left", padx=5)
+
+    def clear_header(self):
+        for w in self._header.winfo_children():
+            w.destroy()
+
+    # ---------------- WINDOW CONTROLS ----------------
+    def _minimize(self):
+        self._window.iconify()
+
+    def _maximize(self):
+        self._window.state("zoomed")
+
+    # ---------------- DRAG ----------------
+    def _start_move(self, event):
+        self._x = event.x
+        self._y = event.y
+
+    def _do_move(self, event):
+        x = event.x_root - self._x
+        y = event.x_root - self._y
+        self._window.geometry(f"+{x}+{y}")
+
+    # ---------------- SIZE ----------------
     def update_size(self):
         self._window.geometry(f"{self._width}x{self._height}")
 
-    def setHeight(self, height):
-        self._height = height
+    def setSize(self, w, h):
+        self._width = w
+        self._height = h
         self.update_size()
 
-    def setWidth(self, width):
-        self._width = width
-        self.update_size()
+    # ---------------- BODY API ----------------
+    def GetBody(self):
+        return self._body
 
-    def setSize(self, width, height):
-        self._width = width
-        self._height = height
-        self.update_size()
-
-    def centerWindow(self):
-        self._window.update_idletasks()
-        w = self._width
-        h = self._height
-        screen_w = self._window.winfo_screenwidth()
-        screen_h = self._window.winfo_screenheight()
-        x = (screen_w // 2) - (w // 2)
-        y = (screen_h // 2) - (h // 2)
-        self._window.geometry(f"{w}x{h}+{x}+{y}")
-    def setBackGroundColor(self, color):
-        self._body.config(bg=color)  
-
-    def setTitle(self, title):
-        self._window.title(title)
-
-    def setResizable(self, width_bool, height_bool):
-        self._window.resizable(width_bool, height_bool)
-
-    def addLabel(self, text):
-        label = tk.Label(self._body, text=text)
-        label.pack(pady=5)
-        return label
-
-    def addButton(self, text, command):
-        btn = tk.Button(self._body, text=text, command=command)
-        btn.pack(pady=5)
-        return btn
     def addCustomButton(self, btn_obj):
         btn_obj.pack(pady=5)
-    def addEntry(self):
-        entry = tk.Entry(self._body)
-        entry.pack(pady=5)
-        return entry
-    def clearWindow(self):
-        for widget in self._body.winfo_children():
-            widget.destroy()
-
-    def displayWindowDetail(self):
-        print(f"Height: {self._height}, Width: {self._width}")
 
     def run(self):
         self._window.mainloop()
 
     def GetWindowFrom(self):
         return self._window
-
-    def GetBody(self):
-        return self._body  # ✅ important for custom components
+    def AddFrame(self, frame):
+        frame.pack(fill="both", expand=True)

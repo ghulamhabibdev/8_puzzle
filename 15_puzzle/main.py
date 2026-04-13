@@ -1,4 +1,5 @@
 from ast import List
+import select
 from Button import Btn
 from Windom import WindowForm
 from query import Query
@@ -72,12 +73,15 @@ class FifteenPuzzle:
 print("Game is Start Stay Tuned!")
 factory = Factory.get_instance()
 HomeForm = factory.create_window_form()
+frame=factory.create_frame();
 btn = factory.create_button()
-btn.SetParent(HomeForm.GetWindowFrom())
-btn.SetText("Hello World")
+btn.SetParent(HomeForm.GetBody())
+btn.SetText("Start Game")
 btn.setColor("blue")
 HomeForm.addCustomButton(btn)
-# HomeForm.run()
-fifteen_puzzle = FifteenPuzzle()
-fifteen_puzzle.addWindform(HomeForm)
-fifteen_puzzle.Run()
+frame.SetParent(HomeForm.GetBody())
+frame.SetHeight(10)
+frame.SetWidth(100)
+frame.SetBackgroundColor("lightgray")
+HomeForm.AddFrame(frame)
+HomeForm.run()
