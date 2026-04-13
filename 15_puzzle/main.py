@@ -6,10 +6,6 @@ from query import Query
 from DB import DB
 from CompontFactory import Factory
 
-# window = WindowForm()
-# window.run()
-
-
 class FifteenPuzzle:
     WindowFormList = []
     WindowFormList
