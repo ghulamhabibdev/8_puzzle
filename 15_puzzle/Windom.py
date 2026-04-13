@@ -4,7 +4,7 @@ class WindowForm:
         self._window = tk.Tk()
         self._width = 400
         self._height = 400
-        self._window.title("8 Puzzle")
+        self._window.title("15 Puzzle")
         self.update_size()
     def update_size(self):
         self._window.geometry(f"{self._width}x{self._height}")
@@ -41,6 +41,8 @@ class WindowForm:
         btn = tk.Button(self._window, text=text, command=command)
         btn.pack()
         return btn
+    def addCustomButton(self, btn_obj):
+        btn_obj.pack()
     def addEntry(self):
         entry = tk.Entry(self._window)
         entry.pack()
