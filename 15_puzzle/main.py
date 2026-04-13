@@ -1,13 +1,9 @@
 from ast import List
-import tkinter as tk
 from Button import Btn
 from Windom import WindowForm
 from query import Query
 from DB import DB
 from CompontFactory import Factory
-
-# window = WindowForm()
-# window.run()
 
 
 class FifteenPuzzle:
@@ -73,6 +69,7 @@ class FifteenPuzzle:
 
     def Exit(self):
         pass
+
 
 print("Game is Start Stay Tuned!")
 factory = Factory.get_instance()
