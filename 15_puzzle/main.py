@@ -3,7 +3,7 @@ import tkinter as tk
 from Button import Btn
 from Windom import WindowForm
 from query import Query
-from db import DB
+from DB import DB
 from  CompontFactory import Factory
 window = WindowForm()
 window.run()
@@ -48,4 +48,7 @@ class EightPuzzle:
         pass
     def Exit(self):
         pass
-    
+print("Game is Start Stay Tuned!")
+factory=Factory.get_instance()
+HomeForm=factory.create_window_form()
+HomeForm.run()

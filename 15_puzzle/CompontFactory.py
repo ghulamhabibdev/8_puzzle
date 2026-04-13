@@ -1,7 +1,8 @@
-from text import Label
+# from text import Label
 from Button import Btn
 from Windom import WindowForm
 from Frame import Frame
+from Label import Label
 class Factory:
     __instance = None 
     def __init__(self):
