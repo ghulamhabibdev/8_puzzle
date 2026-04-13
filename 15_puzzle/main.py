@@ -5,6 +5,8 @@ from Windom import WindowForm
 from query import Query
 from DB import DB
 from CompontFactory import Factory
+
+
 class FifteenPuzzle:
     WindowFormList = []
     WindowFormList
@@ -73,13 +75,14 @@ class FifteenPuzzle:
 print("Game is Start Stay Tuned!")
 factory = Factory.get_instance()
 HomeForm = factory.create_window_form()
-frame=factory.create_frame();
+frame = factory.create_frame()
 btn = factory.create_button()
 btn.SetParent(HomeForm.GetBody())
-# btn.SetText("Start Game")
-# btn.setColor("blue")
+btn.SetText("Start Game")
+btn.setColor("blue")
 HomeForm.addCustomButton(btn)
 frame.SetParent(HomeForm.GetBody())
+frame.SetPosition(-200, -100)
 frame.AddButton(btn)
 frame.SetHeight(10)
 frame.SetWidth(100)
