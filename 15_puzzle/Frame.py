@@ -28,3 +28,8 @@ class Frame:
     def GetFrame(self):
         self._check()
         return self.frame
+    def SetText(self, text):
+        self._check()
+        self.frame.config(text=text)
+    def AddButton(self, button):
+        self._button = button
