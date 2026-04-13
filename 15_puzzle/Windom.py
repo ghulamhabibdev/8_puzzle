@@ -1,4 +1,5 @@
 import tkinter as tk
+from turtle import color
 
 import Button
 
@@ -6,9 +7,9 @@ import Button
 class WindowForm:
     def __init__(self):
         self._window = tk.Tk()
-        self._window.overrideredirect(True) 
-        self._width = 400
-        self._height = 400
+        self._window.overrideredirect(True)
+        self._width = 1200
+        self._height = 800
         self._header = None
         self._body = None
         self._x = 0
@@ -16,7 +17,8 @@ class WindowForm:
         self._window.title("15 Puzzle")
         self.update_size()
         self._init_layout()
-        self._build_header()  
+        self._build_header()
+
     def _init_layout(self):
         self._container = tk.Frame(self._window, bd=1, relief="solid")
         self._container.pack(fill="both", expand=True)
@@ -101,5 +103,9 @@ class WindowForm:
 
     def GetWindowFrom(self):
         return self._window
+
     def AddFrame(self, frame):
         frame.pack(fill="both", expand=True)
+
+    def setBackgroundColor(self, color):
+        self._body.configure(bg=color)
